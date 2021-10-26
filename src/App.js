@@ -31,6 +31,15 @@ function App() {
     setTodoTitle('')
   }
 
+  function deleteTodoItem(event) {
+    const id = event.target.id;
+    const filteredTodoList = todoList.filter((item) => {
+      return item.id !== id
+    });
+
+    setTodoList(filteredTodoList)
+  }
+
   return (
     <div className="App">
       <form onSubmit={addTodoItem}>
@@ -40,7 +49,10 @@ function App() {
       <ul>
         {todoList.map((item) => {
           return (
-            <li key={item.id}>{item.title}</li>
+            <li key={item.id}>
+              {item.title}
+              <button type="button" onClick={deleteTodoItem} id={item.id}>delete</button>
+            </li>
           )
         })}
       </ul>
