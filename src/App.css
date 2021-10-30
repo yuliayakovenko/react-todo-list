@@ -1,3 +1,8 @@
 .App {
   background-color: lavender;
 }
+
+.todoIsCompeted {
+  text-decoration: line-through;
+  color: darkgrey;
+}
