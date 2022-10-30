@@ -3,20 +3,15 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
 import ClearIcon from '@mui/icons-material/Clear';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
-import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
-import Checkbox from '@mui/material/Checkbox';
+
+import { TodoList } from './components/Todos/TodoList';
 
 import './App.css';
 
@@ -110,36 +105,7 @@ function App() {
           </Grid>
         </form>
       </Box>
-      {todoList.length > 0 ? (
-        <Paper>
-          <List>
-            {todoList.map((item) => {
-              return (
-                <ListItem
-                  key={item.id}
-                  pri
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete" type="button" onClick={deleteTodoItem(item.id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemIcon>
-                    <Checkbox
-                      edge="start"
-                      checked={item.isCompleted}
-                      onChange={changeIsCompleted(item.id)}
-                      inputProps={{ 'aria-label': 'Mark todo as completed' }}
-                      title="Mark todo as completed"
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary={item.title} className={item.isCompleted ? 'todoIsCompeted' : ''} />
-                </ListItem>
-              );
-            })}
-          </List>
-        </Paper>
-      ) : null}
+      <TodoList todoList={todoList} deleteTodoItem={deleteTodoItem} changeIsCompleted={changeIsCompleted} />
     </Container>
   );
 }
