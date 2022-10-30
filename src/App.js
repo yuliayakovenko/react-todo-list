@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,58 +16,67 @@ function App() {
   const [todoList, setTodoList] = useState(initialTodoList);
   const [todoTitle, setTodoTitle] = useState('');
 
-  function handleAddTodoItem(event) {
-    event.preventDefault();
-
-    if (todoTitle === '') {
-      return;
-    }
-
-    setTodoList((prevState) => [
-      ...prevState,
-      {
-        title: todoTitle,
-        isCompleted: false,
-        id: uuidv4()
-      }
-    ]);
-
-    handleClearTitle();
-  }
-
-  function handleTitleChange(event) {
-    setTodoTitle(event.target.value);
-  }
-
-  function handleClearTitle() {
+  const handleClearTitle = useCallback(() => {
     setTodoTitle('');
-  }
+  }, []);
 
-  function deleteTodoItem(todoId) {
-    return () => {
-      const filteredTodoList = todoList.filter((item) => {
-        return item.id !== todoId;
-      });
+  const handleAddTodoItem = useCallback(
+    (event) => {
+      event.preventDefault();
 
-      setTodoList(filteredTodoList);
-    };
-  }
+      if (todoTitle === '') {
+        return;
+      }
 
-  function handleCompletedStatus(todoId) {
-    return () => {
-      const newTodoList = todoList.map((item) => {
-        if (item.id === todoId) {
-          return {
-            ...item,
-            isCompleted: !item.isCompleted
-          };
+      setTodoList((prevState) => [
+        ...prevState,
+        {
+          title: todoTitle,
+          isCompleted: false,
+          id: uuidv4()
         }
-        return item;
-      });
+      ]);
 
-      setTodoList(newTodoList);
-    };
-  }
+      handleClearTitle();
+    },
+    [handleClearTitle, todoTitle]
+  );
+
+  const handleTitleChange = useCallback((event) => {
+    setTodoTitle(event.target.value);
+  }, []);
+
+  const deleteTodoItem = useCallback(
+    (todoId) => {
+      return () => {
+        const filteredTodoList = todoList.filter((item) => {
+          return item.id !== todoId;
+        });
+
+        setTodoList(filteredTodoList);
+      };
+    },
+    [todoList]
+  );
+
+  const handleCompletedStatus = useCallback(
+    (todoId) => {
+      return () => {
+        const newTodoList = todoList.map((item) => {
+          if (item.id === todoId) {
+            return {
+              ...item,
+              isCompleted: !item.isCompleted
+            };
+          }
+          return item;
+        });
+
+        setTodoList(newTodoList);
+      };
+    },
+    [todoList]
+  );
 
   return (
     <Container maxWidth="sm" sx={{ pt: 2 }}>

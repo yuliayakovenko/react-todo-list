@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { memo } from 'react';
 
 import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
-export const TodoForm = ({ addTodoItem, handleTitleChange, todoTitle, handleClearTitle }) => {
+export const TodoForm = memo(({ todoTitle, addTodoItem, handleTitleChange, handleClearTitle }) => {
   return (
     <form onSubmit={addTodoItem}>
       <Grid container spacing={2}>
@@ -37,4 +37,4 @@ export const TodoForm = ({ addTodoItem, handleTitleChange, todoTitle, handleClea
       </Grid>
     </form>
   );
-};
+});
