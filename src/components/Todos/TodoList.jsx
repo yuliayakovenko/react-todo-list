@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import List from '@mui/material/List';
 import Paper from '@mui/material/Paper';
 
 import { TodoItem } from './TodoItem';
 
-export const TodoList = ({ todoList, deleteTodoItem, changeIsCompleted }) => {
+export const TodoList = memo(({ todoList, deleteTodoItem, changeIsCompleted }) => {
   if (todoList.length === 0) {
     return null;
   }
@@ -21,4 +21,4 @@ export const TodoList = ({ todoList, deleteTodoItem, changeIsCompleted }) => {
       </List>
     </Paper>
   );
-};
+});
