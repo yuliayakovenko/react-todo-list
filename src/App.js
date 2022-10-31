@@ -5,10 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
-import { TodoForm } from './components/TodoForm/TodoForm';
-import { TodoList } from './components/Todos/TodoList';
-
 import './App.css';
+
+import { TodoForm } from './components/TodoForm';
+import { TodoList } from './components/TodoList';
 
 const initialTodoList = [];
 
