@@ -13,7 +13,7 @@ export const TodoForm = memo(({ todoTitle, addTodoItem, handleTitleChange, handl
       <Grid container spacing={2}>
         <Grid item xs>
           <OutlinedInput
-            placeholder="Write todo title"
+            placeholder="Type todo title"
             fullWidth
             size="small"
             type="text"
@@ -31,7 +31,7 @@ export const TodoForm = memo(({ todoTitle, addTodoItem, handleTitleChange, handl
         </Grid>
         <Grid item>
           <Button type="submit" variant="contained">
-            Add
+            Add todo
           </Button>
         </Grid>
       </Grid>
